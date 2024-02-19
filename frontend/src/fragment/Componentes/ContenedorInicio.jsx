@@ -8,13 +8,15 @@ import { Button } from "reactstrap";
 import { GET } from "../../hooks/Conexion";
 import { getToken } from "../../utilidades/Sessionutil";
 import GraficoHistorico from "./Graficos/GraficoHistorico";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ContenedorInicio = (props) => {
   const { isAdmin } = props;
   const [llDispositivos, setLlDispositivos] = useState(false);
   const [dispositivos, setDispositivos] = useState([]);
+  const [recomendacion, setRecomendacion] = useState([]);
   const [promedio, setPromedio] = useState(0);
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedUVData, setSelectedUVData] = useState(null);
@@ -23,21 +25,38 @@ const ContenedorInicio = (props) => {
     if (!llDispositivos) {
       GET("listar/api_dispositivo", getToken())
         .then((info) => {
-          var dispositivos, promedio;
+          var dispositivos, promedio, recomendacion;
           dispositivos = info.info.dispositivos;
+          recomendacion = info.info.categorias;
           promedio = info.info.promedio;
-          console.log(dispositivos);
+
           if (info.code !== 200) {
             setError("Error de Conexión:  " + info.msg);
           } else {
             setPromedio(promedio);
-            if (!isAdmin) {
-              var dispositivosActivos = dispositivos.filter(
-                (dispositivo) => dispositivo.activo
+            setDispositivos(dispositivos);
+            setRecomendacion(recomendacion);
+            setLoading(false);
+            if (promedio >= 11) {
+              toast.error(
+                `Atención: Se ha registrado un nivel de radiación Extremadamente alto. Recomendación: ${recomendacion[4].descripcion}`
               );
-              setDispositivos(dispositivosActivos);
-            } else {
-              setDispositivos(dispositivos);
+            } else if (promedio >= 8 && promedio < 11) {
+              toast.warning(
+                `Atención: Se ha registrado un nivel de radiación Muy Alto. Recomendación: ${recomendacion[3].descripcion}`
+              );
+            } else if (promedio >= 6 && promedio < 8) {
+              toast.success(
+                `Se ha registrado un nivel de radiación Alto. Recomendación: ${recomendacion[2].descripcion}`
+              );
+            } else if (promedio >= 3 && promedio < 6) {
+              toast.warning(
+                `Atención: Se ha registrado un nivel de radiación Moderado. Recomendación: ${recomendacion[1].descripcion}`
+              );
+            } else if (promedio >= 0 && promedio < 3) {
+              toast.warning(
+                `Atención: Se ha registrado un nivel de radiación bajo. Recomendación: ${recomendacion[0].descripcion}`
+              );
             }
           }
         })
@@ -47,15 +66,17 @@ const ContenedorInicio = (props) => {
         })
         .finally(() => {
           setLlDispositivos(true);
-          setLoading(false);
         });
     }
-  }, [llDispositivos, setLoading]);
+  }, [llDispositivos, promedio, recomendacion]);
+
   const handleGeneratePdf = () => {
     generatePdf(dispositivos, promedio); // Llamamos a la función para generar el PDF con los dispositivos y el promedio
   };
+
   return (
     <>
+      <ToastContainer />
       {loading ? (
         <div
           className="row justify-content-center"
