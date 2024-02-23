@@ -3,7 +3,8 @@ from starlette.responses import RedirectResponse
 from pydantic import BaseModel
 import models.persona as persona
 import models.cuenta as cuenta
-import datetime
+import uvicorn
+
 from hooks.conexion import Conexion
 app = FastAPI()
 
@@ -38,3 +39,6 @@ def listar_medicion_fechas(fechas: persona.Fechas):
 @app.post("/medicionDia", tags=["Medición de Dispositivos"])
 def listar_medicion_fechas(fechas: persona.Fechas):
     return Conexion.POST(fechas, "medicionDia", server="unl")
+
+if __name__ == '__main__':
+    uvicorn.run('main:app', host='0.0.0.0', port=8000)

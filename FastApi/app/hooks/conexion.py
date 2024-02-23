@@ -4,7 +4,7 @@ from utils.Util import Util
 class Conexion:
     def URLN(server = "local"):
         if server == "local":
-           return "http://localhost:3006/api" 
+           return "https://semaforouvunlb.azurewebsites.net/api" 
         elif server == "unl":
             return "https://computacion.unl.edu.ec/uv/api/"
     def GET(urls, token=None, server="local"):
@@ -23,9 +23,7 @@ class Conexion:
         if type == "json":
             headers["Content-Type"] = "application/json"
             data = Util.convertir_a_json(data)
-            print(data)
             data = json.dumps(data)
-            print(data)
         elif type == "form":
             form_data = {key: str(value) for key, value in data.items()}
             data = form_data

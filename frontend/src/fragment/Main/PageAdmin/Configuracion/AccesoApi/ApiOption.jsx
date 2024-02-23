@@ -27,7 +27,10 @@ const ApiOption = () => {
                 mensajes(info.msg, "error", "Error de Acceso");
               } else {
                 mensajes(info.msg, "success", "Exito");
-                window.open("http://localhost:8000/", "_blank");
+                window.open(
+                  "https://semaforouvunlf.azurewebsites.net/",
+                  "_blank"
+                );
               }
             }
           );

@@ -5,6 +5,11 @@ class GPTController {
   async mensaje(req, res) {
     const apiKey = process.env.OPENAI_API_KEY;
     var dispositivos_info = await dispositivos_api();
+    dispositivos_info = {
+      dispositivos: dispositivos_info.dispositivos,
+      promedio: dispositivos_info.promedio,
+      categorias: dispositivos_info.categorias,
+    };
     if (dispositivos_info) {
       dispositivos_info = JSON.stringify(dispositivos_info);
     } else {
@@ -66,6 +71,7 @@ class GPTController {
         info: completion.choices[0].message.content,
       });
     } catch (error) {
+      console.log(error);
       return res.status(500).json({
         code: 500,
         info: "Ha ocurrido un error en el servidor",

@@ -7,28 +7,12 @@
         "dialect": "mysql",
         "operatorAliases": false
     },
-    "development_2": {
+    "development_azure": {
         "username": "desarrollo",
         "password": "HernandezSA30.",
         "database": "semaforo_pis",
-        "host": "adrianserver.database.windows.net",
+        "host": "adrianserve.database.windows.net",
         "dialect": "mssql",
-        "operatorAliases": false
-    },
-    "staging": {
-        "username": "desarrollo",
-        "password": "desarrollo985",
-        "database": "carro",
-        "host": "192.168.1.190",
-        "dialect": "mysql",
-        "operatorAliases": false
-    },
-    "production": {
-        "username": "production",
-        "password": "desarrollo123@",
-        "database": "carro",
-        "host": "192.168.1.200",
-        "dialect": "mysql",
         "operatorAliases": false
     }
 }

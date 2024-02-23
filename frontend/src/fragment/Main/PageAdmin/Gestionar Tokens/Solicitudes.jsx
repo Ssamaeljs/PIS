@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { GET, POST } from "../../../../hooks/Conexion";
+import { GET, POST, URL_BASE } from "../../../../hooks/Conexion";
 import { getToken } from "../../../../utilidades/Sessionutil";
 import { Modal, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router";
@@ -155,7 +155,7 @@ const Solicitudes = (props) => {
   }
 
   function mostrarArchivo(description_pdf) {
-    var url = `http://localhost:3006/docs/solicitudes/${description_pdf}`;
+    var url = `${URL_BASE}/docs/solicitudes/${description_pdf}`;
     window.open(url, "_blank");
   }
   return (
