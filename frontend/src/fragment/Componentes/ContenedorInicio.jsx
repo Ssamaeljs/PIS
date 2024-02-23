@@ -15,6 +15,8 @@ const ContenedorInicio = (props) => {
   const { isAdmin } = props;
   const [llDispositivos, setLlDispositivos] = useState(false);
   const [dispositivos, setDispositivos] = useState([]);
+  const [promedioDias, setPromedioDias] = useState([]);
+  const [promedioHoy, setPromedioHoy] = useState([]);
   const [recomendacion, setRecomendacion] = useState([]);
   const [promedio, setPromedio] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -36,6 +38,8 @@ const ContenedorInicio = (props) => {
             setPromedio(promedio);
             setDispositivos(dispositivos);
             setRecomendacion(recomendacion);
+            setPromedioDias(info.info.promediosDias);
+            setPromedioHoy(info.info.promedioHoy);
             setLoading(false);
             if (promedio >= 11) {
               toast.error(
@@ -143,7 +147,9 @@ const ContenedorInicio = (props) => {
                   (dispositivo) => dispositivo.medicion[0].uv
                 )}
                 dispositivos={dispositivos}
-                radiacionUVPromedio={promedio}
+                radiacionUVPromedio={promedioDias}
+                promedio={promedio}
+                promedioHoy={promedioHoy}
               />
             </div>
           </div>

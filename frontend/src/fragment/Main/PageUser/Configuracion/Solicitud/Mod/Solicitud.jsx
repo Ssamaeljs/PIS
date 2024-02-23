@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { MDBCard, MDBCardBody, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import { useForm } from "react-hook-form";
+import { URL_BASE } from "../../../../../../hooks/Conexion";
 const Solicitud = (props) => {
   const { setShow, usuario } = props;
   const {
@@ -15,9 +16,7 @@ const Solicitud = (props) => {
   useEffect(() => {
     setValue("description", usuario.description);
     setValue("description_pdf", usuario.description_pdf);
-    setPdfFile(
-      `http://localhost:3006/docs/solicitudes/${usuario.description_pdf}`
-    );
+    setPdfFile(`${URL_BASE}/docs/solicitudes/${usuario.description_pdf}`);
   }, [usuario, setValue]);
 
   const onSubmit = (data) => {

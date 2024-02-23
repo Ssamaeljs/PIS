@@ -25,7 +25,13 @@ const MedicionView = (props) => {
       </div>
       <div className="card-body">
         <div className="row ">
-          <div className="col-5">
+          <div
+            className="col-5"
+            style={{
+              overflowX: "auto",
+              overflowY: "auto",
+            }}
+          >
             <MedicionUV selectedUVData={selectedUVData} promedio={promedio} />
           </div>
           <div className="col-sm">

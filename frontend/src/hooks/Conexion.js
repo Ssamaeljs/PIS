@@ -1,5 +1,6 @@
-const URL = "http://localhost:3006/api";
-
+//export const URL_BASE = "https://semaforouvunlb.azurewebsites.net";
+export const URL_BASE = "http://localhost:3006";
+const URL = `${URL_BASE}/api`;
 export const GET = async (urls, token = null, setURLN = false) => {
   var URLN = URL;
   const headers = {};

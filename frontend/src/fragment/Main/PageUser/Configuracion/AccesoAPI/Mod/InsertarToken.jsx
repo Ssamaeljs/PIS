@@ -34,7 +34,7 @@ const InsertarToken = (props) => {
       } else {
         mensajes(info.msg, "success", "Exito");
         setShow(false);
-        window.open("http://localhost:8000/", "_blank");
+        window.open("https://semaforouvunlf.azurewebsites.net/", "_blank");
       }
     });
   };

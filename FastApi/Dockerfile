@@ -1,10 +1,17 @@
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.11
+# syntax=docker/dockerfile:1
 
-COPY . /app/ 
+FROM python:3.11
 
-RUN pip install --upgrade pip
+WORKDIR /code
 
-RUN pip install --no-cache-dir -r /app/requirements.txt
+COPY requirements.txt .
 
-RUN pip install requests
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
+COPY . .
+
+WORKDIR /code/app
+
+EXPOSE 3100
+
+CMD ["gunicorn", "main:app"]
