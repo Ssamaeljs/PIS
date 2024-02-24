@@ -3,16 +3,8 @@
         "username": "desarrollo",
         "password": "desarrollo",
         "database": "semaforo_pis",
-        "host": "127.0.0.1",
+        "host": "mysql",
         "dialect": "mysql",
-        "operatorAliases": false
-    },
-    "development_azure": {
-        "username": "desarrollo",
-        "password": "HernandezSA30.",
-        "database": "semaforo_pis",
-        "host": "adrianserve.database.windows.net",
-        "dialect": "mssql",
         "operatorAliases": false
     }
 }
